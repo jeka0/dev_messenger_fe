@@ -1,0 +1,15 @@
+.mat-Button{
+    width: 125px;
+}
+
+.margin{
+    margin-top: 26px;
+}
+
+.auth-background,
+.auth-container{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}

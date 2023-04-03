@@ -1,0 +1,14 @@
+.home-background{
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.home-content{
+    width: 80%;
+}
+
+.home-list{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0)
+}

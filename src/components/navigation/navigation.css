@@ -1,0 +1,14 @@
+.navigation{
+    width: 186px;
+    height: 100%;
+    border-radius: 0;
+    padding: 10px;
+    top:0;
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation Link, Button{
+    width: 100%;
+}

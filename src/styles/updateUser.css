@@ -1,0 +1,39 @@
+.mat-Input{
+    width: 250px;
+}
+
+.mat-Button{
+    width: 125px;
+}
+
+.margin{
+    margin-top: 26px;
+}
+
+.icon{
+    width: 30px;
+}
+
+.update-background{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.update-container{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.update-user-info img{
+    width: 150px;
+    height: 150px;
+}
+
+.update-user-info h3{
+    font-size: 26px;
+    line-height: 30px;
+}

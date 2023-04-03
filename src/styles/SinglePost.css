@@ -1,0 +1,49 @@
+.single-post-background{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-post-container{
+    display: flex;
+    flex-direction: row;
+    height: 570px;
+    border-radius: 0;
+    padding: 0;
+}
+
+.single-post-content{
+    width: 800px;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+.single-post-header, 
+.single-post-chat, 
+.single-post-action{
+    width: 200px;
+}
+
+.single-post-action{
+    position: absolute;
+	bottom: 0px;
+}
+
+.single-post-chat{
+    height: 90%;
+}
+
+.subcontainer{
+    top:0;
+    position: relative;
+}
+
+.Close{
+    position: absolute;
+    top: 0px;
+    width: 32px;
+    height: 32px;
+}

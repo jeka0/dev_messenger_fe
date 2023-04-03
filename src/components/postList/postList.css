@@ -1,0 +1,10 @@
+.list{
+    display: flex;
+    flex-direction: column;
+}
+
+.load-posts{
+    display: flex;
+    margin-top: 20px;
+    bottom: 0;
+}

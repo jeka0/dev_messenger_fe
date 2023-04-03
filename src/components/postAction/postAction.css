@@ -1,0 +1,11 @@
+.like{
+    margin-left: 10px;
+    display: table;
+    height: 30px
+}
+
+.like span{
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
