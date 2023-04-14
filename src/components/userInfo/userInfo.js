@@ -9,12 +9,14 @@ function UserInfo(props) {
     return (
       <div className={'userInfo ' + props.className}>
         <img src={imageUrl} alt="test" />
-        <h3>
-            {props.user.email}
-        </h3>
-        <h3>
-            {`${props.user.firstName || ""} ${props.user.lastName || ""}`}
-        </h3>
+        <div className="userText">
+          <h3>
+              {props.user.email}
+          </h3>
+          <h3>
+              {`${props.user.firstName || ""} ${props.user.lastName || ""}`}
+          </h3>
+        </div>
       </div>
     );
   }

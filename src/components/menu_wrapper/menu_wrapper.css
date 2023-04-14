@@ -1,0 +1,8 @@
+.wrapper-background{
+    display: flex;   
+}
+
+.wrapper-content{
+    height: 100%;  
+    flex-grow: 1;
+}

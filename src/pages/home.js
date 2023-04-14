@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Background from '../components/background/background.js';
-import Navigation from '../components/navigation/navigation.js';
 import List from '../components/postList/postList.js';
 import { getPosts } from '../services/postService.js';
 import '../styles/Home.css'
@@ -26,12 +24,9 @@ function Home() {
   if(!posts) return (<div>Loading</div>)
 
       return (
-        <Background className="home-background">
-          <Navigation />
           <div className='home-content'>
             <List list={posts.data} getPosts={getPostsRange} total={posts.total} className='home-list'/>
           </div>
-        </Background>
       );
     }
     

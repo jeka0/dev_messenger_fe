@@ -1,14 +1,53 @@
 .navigation{
-    width: 186px;
+    width: 350px;
     height: 100%;
     border-radius: 0;
-    padding: 10px;
+    padding: 0;
     top:0;
-    position: sticky;
     display: flex;
     flex-direction: column;
+    border: 1px solid;
 }
 
 .navigation Link, Button{
     width: 100%;
+}
+
+.navigation-list{
+    flex-grow: 1;
+}
+
+.menu{
+    margin-top: 30px;
+}
+
+.user-block,
+.action-bar{   
+    padding: 5px 0;
+    width: 100%;
+    border-style: solid;
+}
+
+.action-bar{
+    height: 50px;
+    border-width: 0 0 1px 0;
+}
+
+.user-block{
+    border-width: 1px 0 0 0;
+    margin-top: auto;
+}
+
+.user-block img{
+    width: 60px;
+    height: 60px;
+}
+
+.user-block h3{
+    font-size: 20px;
+    line-height: 16px;
+}
+
+.user-block *{
+    margin-left: 8px;
 }

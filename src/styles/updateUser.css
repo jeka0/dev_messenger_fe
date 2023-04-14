@@ -21,6 +21,7 @@
     justify-content: center;
 }
 
+.update-user-info,
 .update-container{
     display: flex;
     flex-flow: column wrap;
