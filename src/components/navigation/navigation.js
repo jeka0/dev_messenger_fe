@@ -11,7 +11,7 @@ import './navigation.css';
 
 function Navigation(props) {
   const { logout, user  } = useAuth();
-  const { communitys } = useCommunityChat();
+  const { communitys, chats } = useCommunityChat();
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -38,6 +38,8 @@ function Navigation(props) {
         </div>
         <div className='navigation-list'>
           {communitys.map((community)=> <Link key={community.id} to={`/community/${community.id}`}><MenuBlock name={community.name} image={community.image}/></Link>)}
+            <h2>chats</h2>
+          {chats.map((chat)=> <Link key={chat.id} to={`/chat/${chat.id}`}><MenuBlock name={chat.name} image={chat.image}/></Link>)}
         </div>
         <UserInfo user = { user } className="user-block"/>
       </Container>

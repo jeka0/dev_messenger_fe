@@ -1,27 +1,27 @@
 import { request } from "./requestService";
 
-export const getCommunitys = async () => {
+export const getChats = async () => {
     const { data } = await request({
         method: 'GET',
-        url: `/community/all`
+        url: `/chat/all`
     });
 
     return data;
 }
   
-export const getCommunityById = async (id) => {
+export const getChatById = async (id) => {
   const { data } = await request({
       method: 'GET',
-      url: `/community/${id}`
+      url: `/chat/${id}`
   });
 
   return data;
 }
 
-export const createCommunity = async (body) => {
+export const createChat = async (body) => {
   await request({
     method: 'POST',
-    url: '/community/create',
+    url: '/chat/create',
     data: body,
   });
 };

@@ -12,7 +12,7 @@ function Community() {
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
   const [community, setCommunity] = useState();
-  const url ='http://localhost:3000/api/image/';
+  const url ='http://localhost:3020/api/image/';
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 

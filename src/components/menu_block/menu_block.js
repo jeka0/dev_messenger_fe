@@ -3,7 +3,7 @@ import image from '../../img/no_image.png'
 import './menu_block.css'
 
 function MenuBlock(props) {
-  const url ='http://localhost:3000/api/image/';
+  const url ='http://localhost:3020/api/image/';
   const imageUrl = props.image? url + props.image: image;
 
     return (

@@ -3,7 +3,7 @@ import image from '../../img/avatar.jpg'
 import './userInfo.css';
 
 function UserInfo(props) {
-  const url ='http://localhost:3000/api/image/';
+  const url ='http://localhost:3020/api/image/';
   const imageUrl = props.image? props.image: props.user.image? url + props.user.image : image;
 
     return (

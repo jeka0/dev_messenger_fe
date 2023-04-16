@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import { getCommunitys } from "../../services/communityService";
+import { getChats } from "../../services/chatService"; 
 
 export const CommunityChatContext = createContext({});
 
 export const CommunityChat = ({ children })=>{
     const [communitys, setCommunitys] = useState([]);
+    const [chats, setChats] = useState([]);
     
 
     useEffect(()=> {
@@ -12,17 +14,21 @@ export const CommunityChat = ({ children })=>{
     }, [])
 
     const init = async ()=>{
-        update();
-
+        updateCommunitys();
+        updateChats();
     }
 
-    const update = async ()=>{
+    const updateCommunitys = async ()=>{
         setCommunitys(await getCommunitys());
+    }
+
+    const updateChats = async ()=>{
+        setChats(await getChats());
     }
 
 
     return (
-        <CommunityChatContext.Provider value={ {communitys, setCommunitys, update} }>
+        <CommunityChatContext.Provider value={ {communitys, setCommunitys, updateCommunitys, chats, setChats, updateChats} }>
             {children}
         </CommunityChatContext.Provider>
     )
