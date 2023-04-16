@@ -1,0 +1,27 @@
+.menu_block{
+    display: flex;
+    width: 100%;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    padding: 2px 0;
+}
+
+.menu_block *{
+    margin-left: 2px;
+}
+
+.menu_block_content h3{
+    margin-top: 0px;
+    margin-bottom: auto;
+}
+
+.menu_block_content{
+    word-break: break-all;
+    word-break: break-word;   
+}
+
+.menu_block img{
+    width: 54px;
+    height: 54px;
+    border-radius: 999999px;
+}

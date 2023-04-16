@@ -42,7 +42,7 @@ function SinglePost() {
             <Container className="single-post-container">
                 <Content className="single-post-content" data={postData} />
                 <div className="subcontainer">
-                  <Link to={`/user/${postData.user.id}`}>
+                  <Link to={`/community/${postData.community.id}`}>
                     <Header className="single-post-header" data={postData}/>
                   </Link>
                   <Chat className="single-post-chat" data={postData} />

@@ -18,7 +18,7 @@ function Post(props) {
 
     return (
       <Container className="post-container">
-        <Link to={`/user/${postData.user.id}`}>
+        <Link to={`/community/${postData.community.id}`}>
           <Header data={postData}/>
         </Link>
         <Link to={`/post/${postData.id}`}>

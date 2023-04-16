@@ -31,6 +31,9 @@
 .action-bar{
     height: 50px;
     border-width: 0 0 1px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 .user-block{
@@ -50,4 +53,10 @@
 
 .user-block *{
     margin-left: 8px;
+}
+
+.menu-button{
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
 }

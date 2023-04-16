@@ -18,10 +18,10 @@ export const getPostById = async (id) => {
   return data;
 }
 
-export const getUserPosts = async (id, page, limit) => {
+export const getCommunityPosts = async (id) => {
   const { data } = await request({
       method: 'GET',
-      url: `/post/posts/user/${id}/?page=${page}&limit=${limit}`
+      url: `/post/community/${id}`
   });
   
   return data;

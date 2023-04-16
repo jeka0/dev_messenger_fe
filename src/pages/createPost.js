@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Background from '../components/background/background.js';
 import Container from '../components/container/container.js';
 import Content from '../components/postContent/postContent.js';
@@ -13,6 +13,7 @@ import LoadImage from '../components/loadImage/loadImage.js';
 import '../styles/createPost.css'
 
 function CreatePost() {
+    const { id } = useParams();
     const [nowImage, setImage] = useState();
     const [message, setMessage] = useState("");
     const [imageUrl, setImageUrl] = useState();
@@ -39,6 +40,7 @@ function CreatePost() {
         if(nowImage){
             const formdata = new FormData();
             formdata.append('image', nowImage);
+            formdata.append('communityId', id);
             if(message)formdata.append('message', message);
             createPost(formdata)
             .then(goBack);
