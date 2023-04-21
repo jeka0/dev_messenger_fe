@@ -43,3 +43,19 @@
 .modal_content.active{
     transform: scale(1);
 }
+
+.modal_content .action{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.action button{
+    border: 1px solid;
+    border-radius: 20px;
+    width: 100px;
+    padding: 5px 0;
+}
+
+#delete{
+    background-color: #a8a8a8;
+}

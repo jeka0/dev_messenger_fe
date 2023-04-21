@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Background from '../components/background/background.js';
-import Container from '../components/container/container.js';
-import Content from '../components/postContent/postContent.js';
+import Container from '../container/container.js';
+import Content from '../postContent/postContent.js';
 import { IconButton } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
-import image from '../img/no-image.jpg'
-import { createPost } from '../services/postService.js';
+import image from '../../img/no-image.jpg'
+import { createPost } from '../../services/postService.js';
 import { Button, TextField } from '@material-ui/core';
-import LoadImage from '../components/loadImage/loadImage.js';
+import LoadImage from '../loadImage/loadImage.js';
 
-import '../styles/createPost.css'
+import './createPost.css'
 
 function CreatePost() {
     const { id } = useParams();
@@ -52,7 +51,7 @@ function CreatePost() {
     }
 
       return (
-        <Background className="create-post-background">
+        <div className="create-post-background">
             <div className='Close'>
               <IconButton
                 size='medium'
@@ -79,7 +78,7 @@ function CreatePost() {
                     </div>
                 </div>
             </Container>
-        </Background>
+        </div>
       );
     }
     

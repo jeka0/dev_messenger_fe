@@ -27,6 +27,15 @@ export const getAllMessages = async () => {
     return data;
 }
 
+export const getAllMessagesByChat = async (chatId) => {
+    const { data } = await request({
+        method: 'GET',
+        url: `/message/chat/${chatId}`
+    });
+
+    return data;
+}
+
 export const updateMessage = async (body)=>{
     await request({
       method: 'PUT',

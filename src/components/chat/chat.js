@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
+import { MenuItem } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 import { useSocket } from '../../contexts/socketContext/useSocket';
-import { getAllMessages } from '../../services/messageService';
+import { getAllMessagesByChat } from '../../services/messageService';
+import { getChatById } from "../../services/chatService";
+import ActionBar from "../action_bar/action_bar";
 import Modal from "../Modal/modal";
 import imgSend from "../../img/send.png";
 import imgClose from "../../img/close.png";
 import Message from '../message/message';
 import "./chat.css";
 
-function Chat(){
-
-    const { sendMessage, socket, updateMessage, deleteMessage } = useSocket();
+function Chat(params){
+    const { id } = useParams();
+    const { sendMessage, socket, updateMessage, deleteMessage, joinToChat, leaveChat } = useSocket();
+    const [chat, setChat] = useState();
     const [message, setMessage] = useState({message:""});
     const [messages, setMessages] = useState({ data:[] });
     const [isConfigured, setIsConfigured] = useState(false); 
@@ -18,12 +23,23 @@ function Chat(){
     const [isBottom, setIsBottom] = useState(false); 
     const [deleteMessageId, setDeleteMessageId] = useState();
     const bottomRef = useRef(null);
+    const chatId = params.id || id;
 
     useEffect(()=>{
-        getAllMessages().then((data)=>{  
+        if(chatId){
+        joinToChat(chatId);
+        getChatById(chatId).then(data=>setChat(data));
+        setMessage({message:""});
+        getAllMessagesByChat(chatId).then((data)=>{  
             setMessages({ data });
         });
-    },[]);
+
+        return ()=>{
+            leaveChat(chatId);
+        }
+    }
+
+    },[chatId]);
 
     useEffect(()=>{
         if(socket && !isConfigured){
@@ -83,7 +99,7 @@ function Chat(){
     }
 
     const deleteMess = ()=>{
-        deleteMessage(deleteMessageId);
+        deleteMessage({id:deleteMessageId, chatId});
         setIsModalActive(false);
     }
 
@@ -95,6 +111,7 @@ function Chat(){
         if(message.message === ""){
             return false;
         }
+        message.chatId = chatId;
         if(isEdit){
             updateMessage(message);
             setIsEdit(false);
@@ -104,12 +121,22 @@ function Chat(){
         }
         setMessage({message:""});
     }
+    const renderBar = ()=>{
+        if(chat){
+            return (
+            <div className="actionBar" >
+                <ActionBar data={chat}>
+                    <MenuItem>Some item</MenuItem>
+                </ActionBar>
+            </div>)
+        } else {
+            return (<div>Loading</div>);
+        }
+    }
 
     return(
         <div className="chat_content">
-            <div className="actionBar">
-                
-            </div>
+            {!params.hidden_action_bar && renderBar()}
             <div className="chatSpace">
                 <div ref={bottomRef}/>
                 {messages.data.map((mess, i)=><Message key={mess.id} data = {mess} next = {messages.data[i+1]} edit ={editMessage} deleteMessage={startModal}/>)}

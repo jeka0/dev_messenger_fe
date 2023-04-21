@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import List from '../components/postList/postList.js';
-import { getPosts } from '../services/postService.js';
-import '../styles/Home.css'
+import List from '../postList/postList.js';
+import { getPosts } from '../../services/postService.js';
+import './Home.css'
 
 function Home() {
   const [posts, setPosts] = useState({ data:[] });

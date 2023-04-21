@@ -1,8 +1,8 @@
 import React from 'react';
 import { Auth } from "./auth/authContext"
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/login";
-import Registration from "./pages/registration"
+import Login from "./components/auth/login";
+import Registration from "./components/auth/registration"
 import AuthorizedRoute from './security/AuthorizedRoute';
 import UnauthorizedRoute from './security/UnauthorizedRoute';
 import MenuWrapper from './components/menu_wrapper/menu_wrapper';

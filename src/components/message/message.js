@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/useAuth';
 import imgDelete from "../../img/delete.png";
 import imgEdit from "../../img/edit.png";
@@ -45,7 +46,7 @@ function Message(props) {
             {showDate()}
             <div className={`messageStyle ${user.id===props.data.user.id? 'me':'other'}`} onMouseOver={mouseOver} onMouseOut={mouseOut}>
                 <div className='messageHead'>
-                    <p className='login'>{props.data.user.email}</p>
+                    <Link to={`/user/${props.data.user.id}`}><p className='login'>{props.data.user.email}</p></Link>
                     <input className="delete" type="image" src={imgDelete} alt="Кнопка «delete»" onClick={()=> props.deleteMessage(props.data.id)} hidden={hidden}/>
                     <input className="edit" type="image" src={imgEdit} alt="Кнопка «edit»" onClick={()=>props.edit(props.data.id, props.data.message)} hidden={hidden}/>
                 </div>

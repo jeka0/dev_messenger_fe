@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { TextField, Box, Button } from '@material-ui/core';
-import { validateEmail } from "../halpers/validation";
-import { useAuth } from '../auth/useAuth.js';
-import Container from '../components/container/container.js';
-import UserInfo from '../components/userInfo/userInfo';
-import Background from '../components/background/background.js';
-import EmailInput from '../components/emailInput/emailInput.js';
-import PasswordInput from '../components/passwordInput/passwordInput.js';
-import { updateUser } from '../services/userService';
-import LoadImage from '../components/loadImage/loadImage';
-import '../styles/updateUser.css';
+import { validateEmail } from "../../halpers/validation";
+import { useAuth } from '../../auth/useAuth.js';
+import Container from '../container/container.js';
+import UserInfo from '../userInfo/userInfo';
+import EmailInput from '../emailInput/emailInput.js';
+import PasswordInput from '../passwordInput/passwordInput.js';
+import { updateUser } from '../../services/userService';
+import LoadImage from '../loadImage/loadImage';
+import './updateUser.css';
 
 function UpdateUser() {
   const [form, setForm] = useState({})
@@ -89,7 +88,7 @@ function UpdateUser() {
   }
 
   return (
-    <Background className="update-background">
+    <div className="update-background">
       <Container className="update-container">
         <UserInfo className="update-user-info" user = {{ image: user.image  }} image = {imageUrl}/>
         <LoadImage className='update-image' name="Load" onChange={changeImage} />
@@ -157,7 +156,7 @@ function UpdateUser() {
         </Link> 
         </Box>
       </Container>
-    </Background>
+    </div>
   );
 }
   

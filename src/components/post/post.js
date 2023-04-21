@@ -4,7 +4,6 @@ import Container from '../container/container.js';
 import Content from '../postContent/postContent.js';
 import Header from '../postHeader/postHeader.js';
 import Action from '../postAction/postAction.js';
-import Chat from '../postChat/postChat.js';
 import './post.css';
 
 function Post(props) {
@@ -26,7 +25,7 @@ function Post(props) {
         </Link>
         <Action data={postData} updatePost = {setPostData}/>
         <Link to={`/post/${postData.id}`}>
-          <Chat data={postData}/>
+          text
         </Link>
       </Container>
     );

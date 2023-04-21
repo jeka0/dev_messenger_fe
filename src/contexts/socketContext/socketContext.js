@@ -21,6 +21,10 @@ export const Socket = ({ children })=>{
             console.log("User connected");
         });
 
+        nowSock.on('user joined', (m)=>{
+            console.log(m);
+        })
+
         nowSock.on('error', err=>{
             console.log(err);
         });
@@ -47,13 +51,22 @@ export const Socket = ({ children })=>{
         socket.emit("update", message);
     }
 
-    const deleteMessage = (id)=>{
-        socket.emit("delete", id);
+    const deleteMessage = (data)=>{
+        socket.emit("delete", data);
     }
-     
+    
+    const joinToChat = (chatId)=>{
+        socket.emit("join", chatId);
+    }
+
+    const leaveChat = (chatId)=>{
+        socket.emit("leave", chatId);
+    }
+
+    if(!socket) return (<div>Loading</div>)
 
     return (
-        <SocketContext.Provider value={ {sendMessage, updateMessage, deleteMessage, socket} }>
+        <SocketContext.Provider value={ {sendMessage, updateMessage, deleteMessage, socket, joinToChat, leaveChat} }>
             {children}
         </SocketContext.Provider>
     )

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from '../../pages/home';
-import SinglePost from '../../pages/singlePost';
-import CreatePost from '../../pages/createPost';
-import User from '../../pages/user';
-import UpdateUser from '../../pages/updateUser';
+import Home from '../home/home';
+import SinglePost from '../singlePost/singlePost';
+import CreatePost from '../createPost/createPost';
+import User from '../user/user';
+import UpdateUser from '../updateUser/updateUser';
 import Background from '../background/background';
 import Navigation from '../navigation/navigation';
 import { CommunityChat } from '../../contexts/community-chat-context/community-chat-context'
@@ -27,7 +27,7 @@ function MenuWrapper() {
                 <Route path="/user/:id" element={ <User /> }/>
                 <Route path="/community/:id" element={ <Community />}/>
                 <Route path="/user/update" element={ <UpdateUser /> }/>
-                <Route path="/chat/*" element={ <div className='chat_area'><Chat /></div>} />
+                <Route path="/chat/:id" element={ <div className='chat_area'><Chat /></div>} />
                 <Route path="*" element={ <Navigate to="/home"/> }/>
               </Routes>
             </div>
