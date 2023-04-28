@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MenuItem } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from '../../auth/useAuth';
 import { useSocket } from '../../contexts/socketContext/useSocket';
+import { useCommunityChat } from "../../contexts/community-chat-context/useCommunityChat"; 
 import { getAllMessagesByChat } from '../../services/messageService';
-import { getChatById } from "../../services/chatService";
+import { getChatById, joinUserToChat, leaveUserTheChat, deleteChat } from "../../services/chatService";
 import ActionBar from "../action_bar/action_bar";
 import Modal from "../Modal/modal";
 import imgSend from "../../img/send.png";
@@ -13,7 +15,10 @@ import "./chat.css";
 
 function Chat(params){
     const { id } = useParams();
+    const { user } = useAuth();
     const { sendMessage, socket, updateMessage, deleteMessage, joinToChat, leaveChat } = useSocket();
+    const { updateChats } = useCommunityChat();
+    const navigate = useNavigate();
     const [chat, setChat] = useState();
     const [message, setMessage] = useState({message:""});
     const [messages, setMessages] = useState({ data:[] });
@@ -22,6 +27,7 @@ function Chat(params){
     const [isEdit, setIsEdit] = useState(false); 
     const [isBottom, setIsBottom] = useState(false); 
     const [deleteMessageId, setDeleteMessageId] = useState();
+    const [isJoin, setIsJoin] = useState();
     const bottomRef = useRef(null);
     const chatId = params.id || id;
 
@@ -40,6 +46,10 @@ function Chat(params){
     }
 
     },[chatId]);
+
+    useEffect(()=>{
+        if(chat)setIsJoin(chat.users.some((u)=>u.id===user.id));
+      }, [chat])
 
     useEffect(()=>{
         if(socket && !isConfigured){
@@ -126,13 +136,26 @@ function Chat(params){
             return (
             <div className="actionBar" >
                 <ActionBar data={chat}>
-                    <MenuItem>Some item</MenuItem>
+                    <MenuItem onClick={joinLeaveUser}>{isJoin? "Leave the chat": "Join to chat"}</MenuItem>
+                    <MenuItem onClick={deleteCh}>Delete chat</MenuItem>
                 </ActionBar>
             </div>)
         } else {
             return (<div>Loading</div>);
         }
     }
+
+    const joinLeaveUser = async ()=>{
+        const chat = isJoin?await leaveUserTheChat(id):await joinUserToChat(id);
+        setChat(chat);
+    }
+
+    const deleteCh = async ()=>{
+        deleteChat(chatId).then(()=>{
+            updateChats();
+            navigate(-1);
+        })
+    } 
 
     return(
         <div className="chat_content">

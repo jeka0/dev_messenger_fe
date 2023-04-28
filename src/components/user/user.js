@@ -20,7 +20,7 @@ function User() {
 
       return (
           <div className="user-content">
-          <UserInfo className="user-info" user = { user }/>
+          <UserInfo className="user-info" user = { user } edit={true}/>
           <hr/>
 
           </div>

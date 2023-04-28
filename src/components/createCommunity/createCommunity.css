@@ -1,3 +1,9 @@
+.community-icon{
+    width: 150px;
+    height: 150px;
+    border-radius: 9999px;
+}
+
 .mat-Input{
     width: 250px;
 }
@@ -6,7 +12,7 @@
     width: 125px;
 }
 
-.margin{
+.community-create-margin{
     margin-top: 26px;
 }
 
@@ -14,7 +20,7 @@
     width: 30px;
 }
 
-.update-background{
+.community-create-background{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,20 +28,9 @@
     height: 100%;
 }
 
-.update-user-info,
-.update-container{
+.community-create-container{
     display: flex;
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-}
-
-.update-user-info img{
-    width: 150px;
-    height: 150px;
-}
-
-.update-user-info h3{
-    font-size: 26px;
-    line-height: 30px;
 }

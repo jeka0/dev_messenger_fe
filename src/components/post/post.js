@@ -23,10 +23,10 @@ function Post(props) {
         <Link to={`/post/${postData.id}`}>
           <Content className="post-content" data={postData}/>
         </Link>
-        <Action data={postData} updatePost = {setPostData}/>
         <Link to={`/post/${postData.id}`}>
-          text
+          <div className="post-message"><h4>{postData.message}</h4></div>
         </Link>
+        <Action data={postData} updatePost = {setPostData}/>
       </Container>
     );
   }

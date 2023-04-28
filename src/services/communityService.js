@@ -25,3 +25,28 @@ export const createCommunity = async (body) => {
     data: body,
   });
 };
+
+export const deleteCommunity = async (id) =>{
+  await request({
+    method: 'DELETE',
+    url: `/community/${id}`
+  });
+}
+
+export const joinUserToCommunity = async (id)=>{
+  const { data } =await request({
+    method: 'POST',
+    url: `/community/join/${id}`
+  });
+
+  return data;
+}
+
+export const leaveUserTheCommunity = async (id)=>{
+  const { data } =await request({
+    method: 'POST',
+    url: `/community/leave/${id}`
+  });
+
+  return data;
+}

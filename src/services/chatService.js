@@ -25,3 +25,28 @@ export const createChat = async (body) => {
     data: body,
   });
 };
+
+export const deleteChat = async (id) =>{
+  await request({
+    method: 'DELETE',
+    url: `/chat/${id}`
+  });
+}
+
+export const joinUserToChat = async (id)=>{
+  const { data } =await request({
+    method: 'POST',
+    url: `/chat/join/${id}`
+  });
+
+  return data;
+}
+
+export const leaveUserTheChat = async (id)=>{
+  const { data } =await request({
+    method: 'POST',
+    url: `/chat/leave/${id}`
+  });
+
+  return data;
+}

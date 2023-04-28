@@ -32,7 +32,8 @@ function Navigation(props) {
           <Menu className='menu' open={open} onClose={handleClose} anchorEl={anchorEl}>
             <MenuItem component={Link} to="/home" onClick={handleClose}>Home</MenuItem>
             <MenuItem component={Link} to={`/user/${user.id}`} onClick={handleClose}>My account</MenuItem>
-            <MenuItem component={Link} to={`/user/update`} onClick={handleClose}>Update account info</MenuItem>
+            <MenuItem component={Link} to={`/chat/create`} onClick={handleClose}>Create chat</MenuItem>
+            <MenuItem component={Link} to={'/community/create'} onClick={handleClose}>Create community</MenuItem>
             <MenuItem component={Link} onClick={logout}>logout</MenuItem>
           </Menu>
         </div>
@@ -41,7 +42,7 @@ function Navigation(props) {
             <h2>chats</h2>
           {chats.map((chat)=> <Link key={chat.id} to={`/chat/${chat.id}`}><MenuBlock name={chat.name} image={chat.image}/></Link>)}
         </div>
-        <UserInfo user = { user } className="user-block"/>
+        <Link to={`/user/${user.id}`}><UserInfo user = { user } className="user-block"/></Link>
       </Container>
     );
   }
