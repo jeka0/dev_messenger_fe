@@ -8,6 +8,25 @@ export const getCommunitys = async () => {
 
     return data;
 }
+
+export const getUserCommunitys = async (id) => {
+  const { data } = await request({
+      method: 'GET',
+      url: `/community/user/${id}`
+  });
+
+  return data;
+}
+
+export const searchCommunity = async (body)=>{
+  const {data} = await request({
+    method: 'POST',
+    url: `/community/search`,
+    data: body
+  });
+
+  return data;
+}
   
 export const getCommunityById = async (id) => {
   const { data } = await request({

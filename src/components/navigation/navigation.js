@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 import { useAuth } from '../../auth/useAuth';
 import { useCommunityChat } from '../../contexts/community-chat-context/useCommunityChat';
 import menuIcon from '../../img/menu.png'
 import Container from '../container/container.js';
 import UserInfo from '../userInfo/userInfo';
 import MenuBlock from '../menu_block/menu_block';
+import SearchBar from '../searchBar/searchBar';
 import './navigation.css';
 
 function Navigation(props) {
@@ -36,10 +37,12 @@ function Navigation(props) {
             <MenuItem component={Link} to={'/community/create'} onClick={handleClose}>Create community</MenuItem>
             <MenuItem component={Link} onClick={logout}>logout</MenuItem>
           </Menu>
+          <SearchBar />
         </div>
         <div className='navigation-list'>
+          <h2>Communities</h2>
           {communitys.map((community)=> <Link key={community.id} to={`/community/${community.id}`}><MenuBlock name={community.name} image={community.image}/></Link>)}
-            <h2>chats</h2>
+          <h2>Chats</h2>
           {chats.map((chat)=> <Link key={chat.id} to={`/chat/${chat.id}`}><MenuBlock name={chat.name} image={chat.image}/></Link>)}
         </div>
         <Link to={`/user/${user.id}`}><UserInfo user = { user } className="user-block"/></Link>

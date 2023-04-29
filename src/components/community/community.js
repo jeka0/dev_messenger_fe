@@ -40,6 +40,7 @@ function Community() {
   const joinLeaveUser = async ()=>{
     const community = isJoin?await leaveUserTheCommunity(id):await joinUserToCommunity(id);
     setCommunity(community);
+    updateCommunitys()
   }
 
   const deleteC = ()=>{

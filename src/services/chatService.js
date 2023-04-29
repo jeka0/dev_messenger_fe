@@ -8,6 +8,15 @@ export const getChats = async () => {
 
     return data;
 }
+
+export const getUserChats = async (id) => {
+  const { data } = await request({
+      method: 'GET',
+      url: `/chat/user/${id}`
+  });
+
+  return data;
+}
   
 export const getChatById = async (id) => {
   const { data } = await request({
@@ -17,6 +26,16 @@ export const getChatById = async (id) => {
 
   return data;
 }
+
+export const searchChat = async (body) => {
+  const { data } = await request({
+    method: 'POST',
+    url: '/chat/search',
+    data: body,
+  });
+
+  return data;
+};
 
 export const createChat = async (body) => {
   await request({

@@ -11,6 +11,7 @@ function MenuBlock(props) {
         <img src={imageUrl} alt="test" />
         <div className="menu_block_content">
           <h3>{props.name}</h3>
+          <h4>{props.message}</h4>
         </div>
       </div>
     );

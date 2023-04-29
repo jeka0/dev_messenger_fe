@@ -148,6 +148,7 @@ function Chat(params){
     const joinLeaveUser = async ()=>{
         const chat = isJoin?await leaveUserTheChat(id):await joinUserToChat(id);
         setChat(chat);
+        updateChats();
     }
 
     const deleteCh = async ()=>{
