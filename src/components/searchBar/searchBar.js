@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import MenuBlock from '../menu_block/menu_block';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
-import { searchCommunity } from '../../services/communityService';
-import { searchChat } from '../../services/chatService';
-import { searchUser } from '../../services/userService';
+import { searchCommunity, getCommunitys } from '../../services/communityService';
+import { searchChat, getChats } from '../../services/chatService';
+import { searchUser, getAllUsers } from '../../services/userService';
 import searchImage from "../../img/search.png";
 import "./searchBar.css"
 
@@ -16,20 +16,26 @@ function SearchBar(){
     const searchRef = useRef();
 
     const handleClick = async (event)=>{
+        let resultsCommunity, resultsChat, resultsUser;
         if(searchName){
-            let results = await searchCommunity({name: searchName});
-            results.map(result=>result.type="community")
-            setSearchResults(results);
-            results = await searchChat({name: searchName});
-            results.map(result=>result.type="chat")
-            setSearchResults(arr=>[...arr, ...results]);
-            results = await searchUser({name: searchName});
-            results.map(result=>result.type="user")
-            setSearchResults(arr=>[...arr, ...results]);
-
-            setAnchorEl(searchRef.current);
-            setOpen(true);
+            resultsCommunity = await searchCommunity({name: searchName});
+            resultsChat = await searchChat({name: searchName});
+            resultsUser = await searchUser({name: searchName});
+        }else{
+            resultsCommunity = await getCommunitys();
+            resultsChat = await getChats();
+            resultsUser = await getAllUsers();
         }
+        resultsCommunity.map(result=>result.type="community")
+        setSearchResults(resultsCommunity);
+        resultsChat.map(result=>result.type="chat")
+        setSearchResults(arr=>[...arr, ...resultsChat]);
+        resultsUser.map(result=>result.type="user");
+        setSearchResults(arr=>[...arr, ...resultsUser]);
+
+        setAnchorEl(searchRef.current);
+        setOpen(true);
+        
     }
 
     const handleClose = ()=>{

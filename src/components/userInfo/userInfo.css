@@ -26,6 +26,7 @@
     width: 124px;
     height: 124px;
     border-radius: 9999px;
+    object-fit: cover;
 }
 
 .userInfo h3 {

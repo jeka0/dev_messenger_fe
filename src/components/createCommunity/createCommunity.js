@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { TextField, Box, Button } from '@material-ui/core';
+import { TextField, Box, Button, Select, MenuItem } from '@material-ui/core';
 import Container from '../container/container.js';
 import { useCommunityChat } from '../../contexts/community-chat-context/useCommunityChat.js';
 import { createCommunity } from '../../services/communityService.js';
@@ -13,7 +13,7 @@ function CreateCommunity() {
         isValid: true,
         message: ""
       };
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState({visibility:"public"})
   const [imageUrl, setImageUrl] = useState();
   const [nowImage, setImage] = useState();
   const [errorForm, setError] = useState(valid);
@@ -49,6 +49,7 @@ function CreateCommunity() {
     }
 
     formdata.append("name", form.name);
+    formdata.append("visibility", form.visibility);
 
     if(nowImage){
         formdata.append('image', nowImage);
@@ -89,6 +90,11 @@ function CreateCommunity() {
             onChange = {updateForm}
           />
         </Box>
+        <h4>Visibility</h4>
+        <Select className='create-community-select' name="visibility" value={form.visibility} onChange={updateForm}>
+          <MenuItem value="public">Public</MenuItem>
+          <MenuItem value="private">Private</MenuItem>
+        </Select>
         <Box className = "community-create-margin">
           <Button 
             className = "mat-Button custom" 
@@ -97,7 +103,7 @@ function CreateCommunity() {
             variant = "contained" 
             onClick={onSubmit}
           >
-            Update
+            Create
           </Button>
         </Box>
         <Box className = "community-create-margin">
