@@ -18,6 +18,14 @@ export const getUserCommunitys = async (id) => {
   return data;
 }
 
+export const updateCommunity = async (id, body) =>{
+  await request({
+    method: 'PUT',
+    url: `/community/${id}`,
+    data: body,
+  });
+}
+
 export const searchCommunity = async (body)=>{
   const {data} = await request({
     method: 'POST',

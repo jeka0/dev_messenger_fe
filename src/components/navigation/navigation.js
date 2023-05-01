@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, MenuItem } from '@material-ui/core';
 import { useAuth } from '../../auth/useAuth';
 import { useCommunityChat } from '../../contexts/community-chat-context/useCommunityChat';
@@ -15,6 +15,7 @@ function Navigation(props) {
   const { communitys, chats } = useCommunityChat();
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleClick = (event)=>{
     setAnchorEl(event.currentTarget);
@@ -24,6 +25,10 @@ function Navigation(props) {
   const handleClose = ()=>{
     setAnchorEl(null);
     setOpen(false);
+  }
+
+  const handleChoose = (result)=>{
+    navigate(`/${result.type}/${result.id}`);
   }
 
     return (
@@ -37,7 +42,7 @@ function Navigation(props) {
             <MenuItem component={Link} to={'/community/create'} onClick={handleClose}>Create community</MenuItem>
             <MenuItem component={Link} onClick={logout}>logout</MenuItem>
           </Menu>
-          <SearchBar />
+          <SearchBar onChoose={handleChoose}/>
         </div>
         <div className='navigation-list'>
           <h2>Communities</h2>

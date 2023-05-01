@@ -43,3 +43,10 @@
 .create-community-select{
     width: 100px;
 }
+
+.create-community-userList{
+    max-height: 118px;
+    overflow-y: auto;
+    width: 280px;
+    margin-top: 10px;
+}

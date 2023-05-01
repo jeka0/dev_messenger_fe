@@ -55,6 +55,7 @@ function Community() {
       return (
         <div className="community-area">
           <ActionBar data={community}>
+            <MenuItem component={Link} to={`/community/update/${community.id}`}>Update community</MenuItem>
             <MenuItem component={Link} to={`/post/create/${community.id}`}>Create post</MenuItem>
             <MenuItem onClick={joinLeaveUser}>{isJoin? "Leave the community": "Join to community"}</MenuItem>
             <MenuItem onClick={deleteC}>Delete community</MenuItem>

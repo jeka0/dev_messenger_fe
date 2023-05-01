@@ -43,3 +43,10 @@
 .create-chat-select{
     width: 100px;
 }
+
+.create-chat-userList{
+    max-height: 118px;
+    overflow-y: auto;
+    width: 280px;
+    margin-top: 10px;
+}

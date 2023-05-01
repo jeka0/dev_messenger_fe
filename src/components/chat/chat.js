@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MenuItem } from "@material-ui/core";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from '../../auth/useAuth';
 import { useSocket } from '../../contexts/socketContext/useSocket';
 import { useCommunityChat } from "../../contexts/community-chat-context/useCommunityChat"; 
@@ -136,6 +136,7 @@ function Chat(params){
             return (
             <div className="actionBar" >
                 <ActionBar data={chat}>
+                    <MenuItem component={Link} to={`/chat/update/${chatId}`}>Update chat</MenuItem>
                     <MenuItem onClick={joinLeaveUser}>{isJoin? "Leave the chat": "Join to chat"}</MenuItem>
                     <MenuItem onClick={deleteCh}>Delete chat</MenuItem>
                 </ActionBar>

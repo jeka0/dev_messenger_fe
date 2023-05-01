@@ -30,7 +30,9 @@ function MenuWrapper() {
                 <Route path="/community/:id" element={ <Community />}/>
                 <Route path="/user/update" element={ <UpdateUser /> }/>
                 <Route path='/chat/create' element={ <CreateChat />}/>
+                <Route path='/chat/update/:id' element={ <CreateChat update={true}/>}/>
                 <Route path='/community/create' element={ <CreateCommunity />}/>
+                <Route path='/community/update/:id' element={ <CreateCommunity update={true}/>}/>
                 <Route path="/chat/:id" element={ <div className='chat_area'><Chat /></div>} />
                 <Route path="*" element={ <Navigate to="/home"/> }/>
               </Routes>

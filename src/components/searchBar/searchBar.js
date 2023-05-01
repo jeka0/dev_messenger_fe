@@ -8,7 +8,7 @@ import { searchUser, getAllUsers } from '../../services/userService';
 import searchImage from "../../img/search.png";
 import "./searchBar.css"
 
-function SearchBar(){
+function SearchBar(props){
     const [searchName, setSearchName] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [open, setOpen] = useState(false);
@@ -18,18 +18,24 @@ function SearchBar(){
     const handleClick = async (event)=>{
         let resultsCommunity, resultsChat, resultsUser;
         if(searchName){
-            resultsCommunity = await searchCommunity({name: searchName});
-            resultsChat = await searchChat({name: searchName});
+            if(!props.onlyUsers){
+                resultsCommunity = await searchCommunity({name: searchName});
+                resultsChat = await searchChat({name: searchName});
+            }
             resultsUser = await searchUser({name: searchName});
         }else{
-            resultsCommunity = await getCommunitys();
-            resultsChat = await getChats();
+            if(!props.onlyUsers){
+                resultsCommunity = await getCommunitys();
+                resultsChat = await getChats();
+            }
             resultsUser = await getAllUsers();
         }
-        resultsCommunity.map(result=>result.type="community")
-        setSearchResults(resultsCommunity);
-        resultsChat.map(result=>result.type="chat")
-        setSearchResults(arr=>[...arr, ...resultsChat]);
+        if(!props.onlyUsers){
+            resultsCommunity.map(result=>result.type="community")
+            setSearchResults(resultsCommunity);
+            resultsChat.map(result=>result.type="chat")
+            setSearchResults(arr=>[...arr, ...resultsChat]);
+        }else{ setSearchResults([]); }
         resultsUser.map(result=>result.type="user");
         setSearchResults(arr=>[...arr, ...resultsUser]);
 
@@ -59,7 +65,7 @@ function SearchBar(){
             </div>
             <Menu className='search-result' open={open} onClose={handleClose} onClick={handleClose} anchorEl={anchorEl}>
                 {searchResults.length?searchResults.map((result)=>
-                <MenuItem component={Link} to={`/${result.type}/${result.id}`} key={result.id+result.type} onClick={()=>choose(result)} >
+                <MenuItem key={result.id+result.type} onClick={()=>{choose(result); props.onChoose(result)}} >
                     <MenuBlock className="search-item" name={result.name || result.email} image={result.image} message={result.type}/>
                 </MenuItem>): <MenuItem>No Search Results</MenuItem>}
             </Menu>

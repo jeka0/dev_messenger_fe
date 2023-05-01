@@ -1,25 +1,61 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import { TextField, Box, Button, Select, MenuItem } from '@material-ui/core';
 import Container from '../container/container.js';
 import { useCommunityChat } from '../../contexts/community-chat-context/useCommunityChat.js';
-import { createChat } from '../../services/chatService.js';
+import { useAuth } from '../../auth/useAuth.js';
+import { createChat, updateChat, getChatById } from '../../services/chatService.js';
+import { getUserById } from '../../services/userService.js';
+import SearchBar from '../searchBar/searchBar.js';
+import MenuBlock from '../menu_block/menu_block.js';
 import LoadImage from '../loadImage/loadImage';
 import NoImage from '../../img/no_image.png';
 import './createChat.css';
 
-function CreateChat() {
-    const valid = {
-        isValid: true,
-        message: ""
-      };
-  const [form, setForm] = useState({visibility:"public"})
+function CreateChat(props) {
+  const { id } = useParams();
+  const { user } = useAuth();
+  const valid = {
+    isValid: true,
+    message: ""
+  };
+
+  const url ='http://localhost:3020/api/image/';
+  const [chat, setChat]= useState();
+  const [form, setForm] = useState({name:"", visibility:"public"})
   const [imageUrl, setImageUrl] = useState();
   const [nowImage, setImage] = useState();
   const [errorForm, setError] = useState(valid);
+  const [users, setUsers] = useState([user]);
   const { updateChats } = useCommunityChat();
   const navigate = useNavigate();
   const fileReader = new FileReader();
+
+  useEffect(()=>{
+    if(props.update){
+      getChatById(id).then((result)=>{
+        setChat(result);
+        setImageUrl(undefined);
+        setImage(undefined);
+        setError(valid);
+      })
+    }else{
+      setChat(undefined);
+      setForm({name:"", visibility:"public"});
+      setImageUrl(undefined);
+      setImage(undefined);
+      setError(valid);
+      setUsers([user]);
+    }
+  }, [props.update])
+
+  useEffect(()=>{
+    if(chat){
+      setForm(chat);
+      setUsers([]);
+      chat.users.forEach(user =>getUserById(user.id).then(result=> setUsers(arr=>[...arr, result ])));
+    }
+  }, [chat])
 
   fileReader.onloadend = ()=>{
       setImageUrl(fileReader.result);
@@ -48,34 +84,55 @@ function CreateChat() {
         return;
     }
 
-    formdata.append("name", form.name);
+    if(chat.name !== form.name)formdata.append("name", form.name);
     formdata.append("visibility", form.visibility);
+    formdata.append("users", JSON.stringify(users));
 
     if(nowImage){
         formdata.append('image', nowImage);
     }
 
-    createChat(formdata)
-    .then(()=>{
-       updateChats().then(goBack);
-    }).catch((err)=>{ 
-        setError({
-        isValid: false,
-        message: err.response.data
-    });});
-
+    if(props.update){
+      updateChat(id, formdata).then(then).catch(error);
+    }else {
+      createChat(formdata).then(then).catch(error);
+    }
   }
+
+  const then = ()=>{
+    updateChats().then(goBack);
+ }
+
+  const error = (err)=>{ 
+    setError({
+    isValid: false,
+    message: err.response.data
+});}
 
   const updateForm = (event)=>{
     setError(valid);
     setForm({...form, [event.target.name] : event.target.value})
   }
 
+  const handleChoose = (user)=>{
+    if(!users.some(u=>u.id===user.id)) setUsers(users=>[...users, user]);
+  }
+
+  const handleDelete = (user)=>{
+    if(users.some(u=>u.id===user.id)){
+      const index = users.indexOf(user);
+      users.splice(index, 1);
+      setUsers([...users]);
+    }
+  }
+
+  if(props.update && !chat) return (<div>Loading</div>)
+
   return (
     <div className="chat-create-background">
       <Container className="chat-create-container">
-        <h1>Create chat</h1>
-        <img src={nowImage? imageUrl: NoImage} className="chat-icon"/>
+        <h1>{props.update?"Update chat":"Create chat"}</h1>
+        <img src={nowImage? imageUrl: chat?.image?url + chat.image: NoImage} className="chat-icon"/>
         <LoadImage className='chat-create-image' name="Load" onChange={changeImage} />
         <Box className = "chat-create-margin">
           <TextField 
@@ -86,7 +143,8 @@ function CreateChat() {
             error={!errorForm.isValid}
             helperText={errorForm.message}
             placeholder = "Enter name"
-            variant = "standard"  
+            variant = "standard"
+            value={form.name} 
             onChange = {updateForm}
           />
         </Box>
@@ -95,6 +153,11 @@ function CreateChat() {
           <MenuItem value="public">Public</MenuItem>
           <MenuItem value="private">Private</MenuItem>
         </Select>
+        <h4>Users</h4>
+        <SearchBar onlyUsers={true} onChoose={handleChoose}/>
+        <div className='create-chat-userList'>
+          {users.length?users.map(user=> <MenuBlock key={user.id} name={user.email} image={user.image} delete={()=>{handleDelete(user)}}/>):<MenuItem>No Users</MenuItem>}
+        </div>
         <Box className = "chat-create-margin">
           <Button 
             className = "mat-Button custom" 
@@ -103,7 +166,7 @@ function CreateChat() {
             variant = "contained" 
             onClick={onSubmit}
           >
-            Create
+            {props.update?"Update":"Create"}
           </Button>
         </Box>
         <Box className = "chat-create-margin">

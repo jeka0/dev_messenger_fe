@@ -12,8 +12,8 @@ export const CommunityChat = ({ children })=>{
     
 
     useEffect(()=> {
-        init();
-    }, [])
+        if(user?.id)init();
+    }, [user])
 
     const init = async ()=>{
         updateCommunitys();

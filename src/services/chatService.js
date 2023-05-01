@@ -45,6 +45,14 @@ export const createChat = async (body) => {
   });
 };
 
+export const updateChat = async (id, body) =>{
+  await request({
+    method: 'PUT',
+    url: `/chat/${id}`,
+    data: body,
+  });
+}
+
 export const deleteChat = async (id) =>{
   await request({
     method: 'DELETE',
