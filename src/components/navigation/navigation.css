@@ -64,4 +64,6 @@
 
 .navigation-list h2{
     margin: 10px 0 10px 10px;
+    word-break: break-all;
+    word-break: break-word;
 }

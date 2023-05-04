@@ -10,13 +10,14 @@
 .single-post-container{
     display: flex;
     flex-direction: row;
-    height: 570px;
+    width: 90%;
+    height: 80%;
     border-radius: 0;
     padding: 0;
 }
 
 .single-post-content{
-    width: 800px;
+    
     height: 100%;
     background-color: black;
     display: flex;
