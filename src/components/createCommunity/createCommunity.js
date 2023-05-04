@@ -98,15 +98,6 @@ function CreateCommunity(props) {
       createCommunity(formdata).then(then).catch(error);
     }
 
-    /*createCommunity(formdata)
-    .then(()=>{
-       updateCommunitys().then(goBack);
-    }).catch((err)=>{ 
-        setError({
-        isValid: false,
-        message: err.response.data
-    });});*/
-
   }
 
   const then = ()=>{
