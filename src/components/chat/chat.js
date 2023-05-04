@@ -86,7 +86,7 @@ function Chat(params){
     }
 
     useEffect(() => {
-        if(isBottom)bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        if(isBottom)bottomRef.current?.scrollIntoView({behavior: 'smooth', block:'end'});
     }, [messages]);
 
 
@@ -163,7 +163,7 @@ function Chat(params){
         <div className="chat_content">
             {!params.hidden_action_bar && renderBar()}
             <div className="chatSpace">
-                <div ref={bottomRef}/>
+                <div className="ref" ref={bottomRef}>bottom</div>
                 {messages.data.map((mess, i)=><Message key={mess.id} data = {mess} next = {messages.data[i+1]} edit ={editMessage} deleteMessage={startModal}/>)}
             </div >
             <div className="inputPanel">

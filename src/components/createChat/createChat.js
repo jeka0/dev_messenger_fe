@@ -84,7 +84,7 @@ function CreateChat(props) {
         return;
     }
 
-    if(chat.name !== form.name)formdata.append("name", form.name);
+    if(chat?.name !== form.name)formdata.append("name", form.name);
     formdata.append("visibility", form.visibility);
     formdata.append("users", JSON.stringify(users));
 

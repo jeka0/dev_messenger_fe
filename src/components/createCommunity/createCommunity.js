@@ -84,7 +84,7 @@ function CreateCommunity(props) {
         return;
     }
 
-    if(community.name !== form.name)formdata.append("name", form.name);
+    if(community?.name !== form.name)formdata.append("name", form.name);
     formdata.append("visibility", form.visibility);
     formdata.append("users", JSON.stringify(users));
 
