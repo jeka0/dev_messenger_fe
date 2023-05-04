@@ -10,15 +10,16 @@
 .single-post-container{
     display: flex;
     flex-direction: row;
-    width: 90%;
+    max-height: 570px;
     height: 80%;
+    width: 90%;
+    max-width: 1050px;
     border-radius: 0;
     padding: 0;
 }
 
 .single-post-content{
-    
-    height: 100%;
+    flex: 1;
     background-color: black;
     display: flex;
     align-items: center;
@@ -37,6 +38,7 @@
 .subcontainer{
     display:flex;
     flex-direction: column;
+    margin-left: auto;
     width: 250px;
     top:0;
 }
