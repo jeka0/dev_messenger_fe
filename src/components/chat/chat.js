@@ -23,7 +23,8 @@ function Chat(params){
     const [message, setMessage] = useState({message:""});
     const [messages, setMessages] = useState({ data:[] });
     const [isConfigured, setIsConfigured] = useState(false); 
-    const [isModalActive, setIsModalActive] = useState(false); 
+    const [isModalActive, setIsModalActive] = useState(false);
+    const [isModalActiveC, setIsModalActiveC] = useState(false);
     const [isEdit, setIsEdit] = useState(false); 
     const [isBottom, setIsBottom] = useState(false); 
     const [deleteMessageId, setDeleteMessageId] = useState();
@@ -138,7 +139,7 @@ function Chat(params){
                 <ActionBar data={chat}>
                     <MenuItem component={Link} to={`/chat/update/${chatId}`}>Update chat</MenuItem>
                     <MenuItem onClick={joinLeaveUser}>{isJoin? "Leave the chat": "Join to chat"}</MenuItem>
-                    <MenuItem onClick={deleteCh}>Delete chat</MenuItem>
+                    <MenuItem onClick={()=>{setIsModalActiveC(true)}}>Delete chat</MenuItem>
                 </ActionBar>
             </div>)
         } else {
@@ -156,6 +157,7 @@ function Chat(params){
         deleteChat(chatId).then(()=>{
             updateChats();
             navigate(-1);
+            setIsModalActiveC(false);
         })
     } 
 
@@ -173,6 +175,9 @@ function Chat(params){
             </div>
             <Modal active={isModalActive} setActive={setIsModalActive} text="Are you sure you want to delete the message?" 
                 confirmationButtonText="Delete" confirmation = {deleteMess} />
+
+            <Modal active={isModalActiveC} setActive={setIsModalActiveC} text="Are you sure you want to delete the chat?" 
+                confirmationButtonText="Delete" confirmation = {deleteCh} />
         </div>
     );
 }

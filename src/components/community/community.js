@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate} from 'react-router-dom';
 import { MenuItem } from '@material-ui/core';
 import { useAuth } from '../../auth/useAuth';
 import ActionBar from '../action_bar/action_bar';
+import Modal from '../Modal/modal';
 import List from '../postList/postList';
 import { getCommunityPosts } from '../../services/postService';
 import { getCommunityById, joinUserToCommunity, leaveUserTheCommunity, deleteCommunity } from '../../services/communityService';
@@ -14,6 +15,7 @@ function Community() {
   const { user } = useAuth();
   const [posts, setPosts] = useState([]);
   const [community, setCommunity] = useState();
+  const [isModalActive, setIsModalActive] = useState(false);
   const [isJoin, setIsJoin] = useState();
   const { updateCommunitys } = useCommunityChat();
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ function Community() {
     deleteCommunity(id).then(()=>{
       updateCommunitys()
       navigate(-1);
+      setIsModalActive(false);
     })
   }
 
@@ -58,12 +61,14 @@ function Community() {
             <MenuItem component={Link} to={`/community/update/${community.id}`}>Update community</MenuItem>
             <MenuItem component={Link} to={`/post/create/${community.id}`}>Create post</MenuItem>
             <MenuItem onClick={joinLeaveUser}>{isJoin? "Leave the community": "Join to community"}</MenuItem>
-            <MenuItem onClick={deleteC}>Delete community</MenuItem>
+            <MenuItem onClick={()=>setIsModalActive(true)}>Delete community</MenuItem>
           </ActionBar>
           
           <div className='community-content'>
             <List list={posts} getPosts={getPostsRange} total={posts.total} className='home-list'/>
           </div>
+          <Modal active={isModalActive} setActive={setIsModalActive} text="Are you sure you want to delete the community?" 
+                confirmationButtonText="Delete" confirmation = {deleteC} />
         </div>
       );
     }
