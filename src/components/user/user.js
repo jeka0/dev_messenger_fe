@@ -133,7 +133,7 @@ function User() {
              <Container className="user-cont">
                 <div className="user_education-info">
                   <h3>Educations</h3>
-                  <input className='add-education' type="image" src={plusImg} alt="Кнопка «menu»" onClick={()=>setIsAddEduActive(true)}/>
+                  {user.id===nowUser.id && <input className='add-education' type="image" src={plusImg} alt="Кнопка «menu»" onClick={()=>setIsAddEduActive(true)}/>}
                 </div>
                 <div className="user-educations-list">
                   {educations.length?educations.map(education=><div className="user-education" key={education.id}>
@@ -143,7 +143,7 @@ function User() {
                         <h4>{education.Speciality}</h4>
                         <h5>{`${education.start_year}-${education.end_year}`}</h5>
                       </div>
-                      <input className='delete-skill' type="image" src={deleteImg} alt="Кнопка «menu»" onClick={()=>startModalE(education.id)}/>
+                      {user.id===nowUser.id && <input className='delete-skill' type="image" src={deleteImg} alt="Кнопка «menu»" onClick={()=>startModalE(education.id)}/>}
                     </div>
                     <hr/>
                   </div>):<MenuItem>No Educations</MenuItem>}
@@ -152,13 +152,13 @@ function User() {
               <Container className="user-cont">
                 <div className="user_skill-info">
                   <h3>Skills</h3>
-                  <input className='add-skill' type="image" src={plusImg} alt="Кнопка «menu»" onClick={startAddSkillModal}/>
+                  {user.id===nowUser.id && <input className='add-skill' type="image" src={plusImg} alt="Кнопка «menu»" onClick={startAddSkillModal}/>}
                 </div>
                 <div className="user-skills-list">
                   {skills.length?skills.map(skill=><div className="user-skill" key={skill.id}>
                     <div className="user_skill-info">
                       <h4>{skill.name}</h4>
-                      <input className='delete-skill' type="image" src={deleteImg} alt="Кнопка «menu»" onClick={()=>startModal(skill.id)}/>
+                      {user.id===nowUser.id && <input className='delete-skill' type="image" src={deleteImg} alt="Кнопка «menu»" onClick={()=>startModal(skill.id)}/>}
                     </div>
                     <hr/>
                   </div>):<MenuItem>No Skills</MenuItem>}
