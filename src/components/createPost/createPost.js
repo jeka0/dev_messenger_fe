@@ -1,0 +1,85 @@
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Container from '../container/container.js';
+import Content from '../postContent/postContent.js';
+import { IconButton } from '@material-ui/core';
+import { Clear } from '@material-ui/icons';
+import image from '../../img/no-image.jpg'
+import { createPost } from '../../services/postService.js';
+import { Button, TextField } from '@material-ui/core';
+import LoadImage from '../loadImage/loadImage.js';
+
+import './createPost.css'
+
+function CreatePost() {
+    const { id } = useParams();
+    const [nowImage, setImage] = useState();
+    const [message, setMessage] = useState("");
+    const [imageUrl, setImageUrl] = useState();
+    const navigate = useNavigate();
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = ()=>{
+        setImageUrl(fileReader.result);
+    }
+
+    const changeImage = (e)=>{
+        try{
+            const file =  e.target.files[0];
+            setImage(file);
+            fileReader.readAsDataURL(file);
+        }catch{}
+    }
+
+    const goBack = ()=>{
+        navigate(-1);
+      }
+
+    const send = ()=>{
+        if(nowImage){
+            const formdata = new FormData();
+            formdata.append('image', nowImage);
+            formdata.append('communityId', id);
+            if(message)formdata.append('message', message);
+            createPost(formdata)
+            .then(goBack);
+        }
+    }
+
+    const changeMessage = (e)=>{
+        setMessage(e.target.value !== "" ? e.target.value:null);
+    }
+
+      return (
+        <div className="create-post-background">
+            <div className='Close'>
+              <IconButton
+                size='medium'
+                onClick={goBack}>
+                <Clear/>
+              </IconButton>
+            </div>
+            <Container className="create-post-container">
+                <Content className="create-post-content" image={imageUrl || image}/>
+                <div className="create-subcontainer">
+                    <h3>Choose an image</h3>
+                    <LoadImage className='create-image' name="Load" onChange={changeImage}/>
+                    <div className='create-Input'>
+                        <TextField 
+                            type = "text" 
+                            label = "Message"
+                            placeholder = "Enter message" 
+                            variant = "standard"
+                            onChange={changeMessage} 
+                        />
+                    </div>
+                    <div className='create-send'>
+                        <Button onClick={send} disabled={!nowImage}>Send</Button>
+                    </div>
+                </div>
+            </Container>
+        </div>
+      );
+    }
+    
+export default CreatePost;

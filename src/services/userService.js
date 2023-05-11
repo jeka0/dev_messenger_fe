@@ -1,5 +1,14 @@
 import { request } from "./requestService";
 
+export const getAllUsers = async ()=>{
+  const { data } = await request({
+    method: 'GET',
+    url: '/user/all'
+  });
+
+  return data;
+}
+
 export const getUser = async ()=>{
     const { data } = await request({
       method: 'GET',
@@ -25,3 +34,13 @@ export const updateUser = async (body)=>{
     data: body
   });
 }
+
+export const searchUser = async (body) => {
+  const { data } = await request({
+    method: 'POST',
+    url: '/user/search',
+    data: body,
+  });
+
+  return data;
+};

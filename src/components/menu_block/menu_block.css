@@ -1,0 +1,38 @@
+.menu_block{
+    display: flex;
+    width: 100%;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    padding: 2px 0;
+}
+
+.menu_block *{
+    margin-left: 2px;
+}
+
+.menu_block_content h3,
+.menu_block_content h4{
+    margin-top: 0px;
+    margin-bottom: auto;
+}
+
+.menu_block_content{
+    flex: 1;
+    word-break: break-all;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu_block img{
+    width: 54px;
+    height: 54px;
+    border-radius: 999999px;
+    object-fit: cover;
+}
+
+.delete-item-button{
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+}

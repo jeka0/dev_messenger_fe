@@ -4,7 +4,6 @@ import Container from '../container/container.js';
 import Content from '../postContent/postContent.js';
 import Header from '../postHeader/postHeader.js';
 import Action from '../postAction/postAction.js';
-import Chat from '../postChat/postChat.js';
 import './post.css';
 
 function Post(props) {
@@ -18,16 +17,16 @@ function Post(props) {
 
     return (
       <Container className="post-container">
-        <Link to={`/user/${postData.user.id}`}>
+        <Link to={`/community/${postData.community.id}`}>
           <Header data={postData}/>
         </Link>
         <Link to={`/post/${postData.id}`}>
           <Content className="post-content" data={postData}/>
         </Link>
-        <Action data={postData} updatePost = {setPostData}/>
         <Link to={`/post/${postData.id}`}>
-          <Chat data={postData}/>
+          <div className="post-message"><h4>{postData.message}</h4></div>
         </Link>
+        <Action data={postData} updatePost = {setPostData}/>
       </Container>
     );
   }

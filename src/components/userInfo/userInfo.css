@@ -1,15 +1,32 @@
 .userInfo{
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+}
+
+.imageConst{
+    display:flex;
+    flex-direction: row;
+}
+
+.editUser{
+    margin-top: auto;
+}
+
+.editUserIcon{
+    width: 32px;
+    height: 32px;
+}
+
+.userInfo .userText{
+    word-break: break-all;
+    word-break: break-word;
 }
 
 .userInfo img {
     width: 124px;
     height: 124px;
     border-radius: 9999px;
+    object-fit: cover;
 }
 
 .userInfo h3 {

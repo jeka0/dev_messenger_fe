@@ -1,0 +1,24 @@
+.wrapper-background{
+    display: flex;   
+}
+
+.wrapper-content{
+    height: 100%;  
+    flex-grow: 1;
+}
+
+.chat_area{
+    display: flex;
+    justify-content: center;
+    min-width: 234px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.chat_area .chatSpace,
+.chat_area .inputPanel{
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import './postContent.css';
 
 function Content(props) {
-  const url ='http://localhost:3000/api/image/';
+  const url ='http://localhost:3020/api/image/';
   
     return (
         <div className={'content ' + props.className} onClick = {props.onClick}>
